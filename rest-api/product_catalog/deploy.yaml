@@ -1,0 +1,19 @@
+version: "3.8"
+
+networks:
+  default:
+    external:
+      name: backend
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - 37017:27017
+  movie-app-image:
+    image: spring-boot-examples/product-catalog
+    container_name:  product-catalog-container
+    ports:
+      - 9080:8080
+    links:
+      - mongodb

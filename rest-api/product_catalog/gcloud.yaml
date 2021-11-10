@@ -1,0 +1,27 @@
+gcloud init
+
+
+
+gcloud container clusters get-credentials {yourClusterName} --zone us-west1-a --project {yourProjectId}
+
+gcloud container clusters create hello-world
+
+
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value core/account)
+
+gcloud auth configure-docker
+
+
+gcloud auth configure-docker
+
+
+docker tag kayak-app:1.0 gcr.io/$PROJECT_NAME/kayak-app:1.0;  
+docker push gcr.io/$PROJECT_NAME/kayak-app:1.0
+
+
+mvnw com.google.cloud.tools:jib-maven-plugin:build -Dimage=gcr.io/$GOOGLE_CLOUD_PROJECT/spring-boot-example:v1
+
+
+gcloud auth list
+
+gcloud config list project

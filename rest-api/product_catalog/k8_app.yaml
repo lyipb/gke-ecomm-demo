@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-catalog-service
+spec:
+  selector:
+    app: product-catalog
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    nodePort: 30081
+  type: NodePort
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-catalog-deployment
+spec:
+  replicas: 1
+  selector:
+      matchLabels:
+        app: product-catalog
+  template:
+    metadata:
+      labels:
+        app: product-catalog
+    spec:
+      containers:
+        - name: product-catalog
+          image: lyipb/ecommerce-product-catalog:10.0
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8080
+          env:
+          # - name: MONGO_DATABASE
+          #   valueFrom:
+          #       configMapKeyRef:
+          #           name: mongo-db-config
+          #           key:  database
+          # - name: MONGO_USERNAME
+          #   valueFrom:
+          #       secretKeyRef:
+          #           name: mongo-db-secret
+          #           key: pc-user1
+          # - name: MONGO_PASSWORD
+          #   valueFrom:
+          #         secretKeyRef:
+          #             name: mongo-db-secret
+          #             key: pc-pwd1
+          - name: PRODUCT_INVENTORY_DEPLOYMENT_SERVICE_HOST
+            valueFrom:
+                configMapKeyRef:
+                    name: mongo-db-config
+                    key:  pi-host
+          - name: PRODUCT_INVENTORY_DEPLOYMENT_SERVICE_PORT
+            valueFrom:
+                configMapKeyRef:
+                    name: mongo-db-config
+                    key:  pi-port
+          # - name: MONGO_HOST
+          #   valueFrom:
+          #       configMapKeyRef:
+          #           name: mongo-db-config
+          #           key:  pc-mongo-host
+          # - name: MONGO_PORT
+          #   valueFrom:
+          #       configMapKeyRef:
+          #           name: mongo-db-config
+          #           key:  pc-mongo-port
+
+          - name:  MONGODB_URI
+            # value: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}
+            value: mongodb://pc-mongo-0.pc-mongo, pc-mongo-1.pc-mongo, pc-mongo-2.pc-mongo/ecommerce

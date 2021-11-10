@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: mongo-db-config
+data:
+ pc-mongo-host: pc-mongo
+ pc-mongo-port: "27017"
+ pi-mongo-host: pi-mongo
+ pi-mongo-port: "27019"
+ pi-host: product-inventory-service
+ pi-port: "8080"
+ database: ecommerce
+ init-db: admin
+
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+      name: mongo-db-secret
+type: Opaque
+data:
+      init-user: cm9vdA==
+      init-password: cm9vdHJvb3Q=
+      pc-user1: ZS11c2VyMQ==
+      pc-pwd1: cHdkMQ==
+      pi-user1: cC11c2VyMg==
+      pi-pwd1: cHdkMg==
