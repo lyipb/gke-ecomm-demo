@@ -1,5 +1,6 @@
 package com.example.microservices.product_inventory;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,14 @@ public class ProductInventoryService {
     public List<ProductInventory> getProductList(){
         return mongoTemplate.findAll(ProductInventory.class);
     }
+    
+    @GetMapping("/inventory/arr")
+    public ProductInventory[] getProductArr(){
+        List<ProductInventory> piList =  mongoTemplate.findAll(ProductInventory.class);
+        return piList.toArray(new ProductInventory[piList.size()]);
+    }
+
+    
 
 //    @Value("${MONGO_PASSWORD}")
 //    private String pwd;

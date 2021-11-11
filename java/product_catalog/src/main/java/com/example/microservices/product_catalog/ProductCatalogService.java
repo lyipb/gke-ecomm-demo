@@ -151,6 +151,21 @@ public class ProductCatalogService {
         return product;
     }
 
+    
+    @GetMapping("/product/inventory")
+    public List<ProductInventory> getInventoryList(){
+   
+    	ProductInventory[] piArray = restTemplate.getForObject("http://"+psHost+":"+psPort+"/inventory/arr", ProductInventory[].class);
+        return Arrays.asList(piArray);
+    }
+    
+    @PostMapping("/product/inventory")
+    public ProductInventory addInventory(@RequestBody ProductInventory inv){
+   
+        return restTemplate.postForObject("http://"+psHost+":"+psPort+"/inventory/" ,inv, ProductInventory.class);
+
+    }
+
 
     @DeleteMapping("/product/{id}")
     public String deleteProduct(@PathVariable String id) {

@@ -18,59 +18,43 @@
 # Register GCE Fast SSD persistent disks and then create the persistent disks 
 
 
-# echo "Creating GCE disks"
-# for i in 1 2 3
-# do
-#     gcloud compute disks create --size 10GB --type pd-ssd pd-ssd-disk-$i --zone=us-central1-c
-# done 
-# sleep 3
-
 # echo "Creating GCE disks for pc"
-# for i in 1 2 3
-# do
-#     gcloud compute disks create --size 10GB --type pd-ssd pd-ssd-disk-pc-$i --zone=us-central1-c
-# done 
-# sleep 3
+for i in 1 2 3
+do
+    gcloud compute disks create --size 10GB --type pd-ssd pd-ssd-disk-pc-$i --zone=us-central1-c
+done 
+sleep 3
 
 # echo "Creating GCE disks for pi"
-# for i in 1 2 3
-# do
-#     gcloud compute disks create --size 10GB --type pd-ssd pd-ssd-disk-pi-$i --zone=us-central1-c
-# done 
-# sleep 3
+for i in 1 2 3
+do
+    gcloud compute disks create --size 10GB --type pd-ssd pd-ssd-disk-pi-$i --zone=us-central1-c
+done 
+sleep 3
 
 
 # Create persistent volumes using disks created above
 
 
 
-# echo "Creating GKE Persistent Volumes"
-# for i in 1 2 3
-# do
-#     sed -e "s/INST/${i}/g" ../resources/xfs-gce-ssd-persistentvolume.yaml > /tmp/xfs-gce-ssd-persistentvolume.yaml
-#     kubectl apply -f /tmp/xfs-gce-ssd-persistentvolume.yaml
-# done
-# rm /tmp/xfs-gce-ssd-persistentvolume.yaml
-# sleep 3
-
 # echo "Creating GKE Persistent Volumes for pc"
-# for i in 1 2 3
-# do
-#     sed -e "s/INST/${i}/g" ../resources/xfs-gce-ssd-persistentvolume-pc.yaml > /tmp/xfs-gce-ssd-persistentvolume-pc.yaml
-#     kubectl apply -f /tmp/xfs-gce-ssd-persistentvolume-pc.yaml
-# done
-# rm /tmp/xfs-gce-ssd-persistentvolume.yaml
-# sleep 3
+for i in 1 2 3
+do
+    sed -e "s/INST/${i}/g" ../resources/xfs-gce-ssd-persistentvolume-pc.yaml > /tmp/xfs-gce-ssd-persistentvolume-pc.yaml
+    kubectl apply -f /tmp/xfs-gce-ssd-persistentvolume-pc.yaml
+done
+rm /tmp/xfs-gce-ssd-persistentvolume.yaml
+sleep 3
 
 
 # echo "Creating GKE Persistent Volumes for pi"
-# for i in 1 2 3
-# do
-#     sed -e "s/INST/${i}/g" ../resources/xfs-gce-ssd-persistentvolume-pi.yaml > /tmp/xfs-gce-ssd-persistentvolume-pi.yaml
-#     kubectl apply -f /tmp/xfs-gce-ssd-persistentvolume-pi.yaml
-# done
-# rm /tmp/xfs-gce-ssd-persistentvolume.yaml
-# sleep 3
+for i in 1 2 3
+do
+    sed -e "s/INST/${i}/g" ../resources/xfs-gce-ssd-persistentvolume-pi.yaml > /tmp/xfs-gce-ssd-persistentvolume-pi.yaml
+    kubectl apply -f /tmp/xfs-gce-ssd-persistentvolume-pi.yaml
+done
+rm /tmp/xfs-gce-ssd-persistentvolume.yaml
+sleep 3
 
 
 
@@ -81,11 +65,6 @@
 # kubectl create secret generic shared-bootstrap-data --from-file=internal-auth-mongodb-keyfile=$TMPFILE
 # rm $TMPFILE
 
-
-
-# # Create mongodb service with mongod stateful-set 
-# kubectl apply -f ../resources/mongodb-service.yaml
-# echo
 
 # Create mongodb service with mongod stateful-set for pc
 kubectl apply -f ../resources/ecomm_mongo_pc.yaml
