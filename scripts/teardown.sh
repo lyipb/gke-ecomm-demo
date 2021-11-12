@@ -53,3 +53,7 @@ done
 # Delete whole Kubernetes cluster (including its VM instances)
 gcloud -q container clusters delete "gke-ecommerce-demo-cluster"
 
+gcloud container images delete "gcr.io/curious-ellipse-318103/ecommerce-product-catalog" --quiet
+
+gcloud container images delete "gcr.io/curious-ellipse-318103/ecommerce-product-inventory" --quiet
+
