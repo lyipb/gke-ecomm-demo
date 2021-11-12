@@ -65,6 +65,9 @@ sleep 3
 # kubectl create secret generic shared-bootstrap-data --from-file=internal-auth-mongodb-keyfile=$TMPFILE
 # rm $TMPFILE
 
+# Create configmap, secrets for ecommerce app
+kubectl apply -f ../resources/ecomm_config_secret.yaml
+
 
 # Create mongodb service with mongod stateful-set for pc
 kubectl apply -f ../resources/ecomm_mongo_pc.yaml
