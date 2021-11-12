@@ -74,6 +74,14 @@ echo
 kubectl apply -f ../resources/ecomm_mongo_pi.yaml
 echo
 
+# Create rest api for pc
+kubectl apply -f ../resources/ecomm_pc.yaml
+echo
+
+# Create rest api for pi
+kubectl apply -f ../resources/ecomm_pi.yaml
+echo
+
 
 # Wait until the final (3rd) mongod has started properly
 
