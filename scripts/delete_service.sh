@@ -4,9 +4,10 @@
 ##
 
 # Just delete mongod stateful set + mongodb service onlys (keep rest of k8s environment in place)
-kubectl delete statefulsets mongod
-kubectl delete services mongodb-service
+kubectl delete -f ../resources/ecomm_pc.yaml
+kubectl delete -f ../resources/ecomm_pi.yaml
 
-# Show persistent volume claims are still reserved even though mongod stateful-set has been undeployed
-kubectl get persistentvolumes
+
+kubectl delete -f ../resources/ecomm_mongo_pc.yaml
+kubectl delete -f ../resources/ecomm_mongo_pi.yaml
 
